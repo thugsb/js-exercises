@@ -12,6 +12,13 @@
  */
 export const sumMultiples = (arr) => {
   if (arr === undefined) throw new Error("arr is required");
+  let total = 0;
+  arr.forEach((num) => {
+    if (num % 3 === 0 || num % 5 === 0) {
+      total += num;
+    }
+  });
+  return total;
 };
 
 /**
@@ -21,6 +28,12 @@ export const sumMultiples = (arr) => {
  */
 export const isValidDNA = (str) => {
   if (str === undefined) throw new Error("str is required");
+  const cleanedString = str.toLowerCase().replace(/[^CGTA]/gi, "");
+  // Remove the valid DNA characters 'CGTA' from the string, then check it's the same length
+  if (str.length > 0 && str.length === cleanedString.length) {
+    return true;
+  }
+  return false;
 };
 
 /**
@@ -30,6 +43,16 @@ export const isValidDNA = (str) => {
  */
 export const getComplementaryDNA = (str) => {
   if (str === undefined) throw new Error("str is required");
+  if (isValidDNA(str)) {
+    const aOthered = str.toUpperCase().replace(/[A]/gi, "B");
+    const acOthered = aOthered.replace(/[C]/gi, "D");
+    const acOgReplaced = acOthered.replace(/[G]/gi, "C");
+    const acOgtReplaced = acOgReplaced.replace(/[T]/gi, "A");
+    const aOcgtReplaced = acOgtReplaced.replace(/[D]/gi, "G");
+    const acgtReplaced = aOcgtReplaced.replace(/[B]/gi, "T");
+    console.log(acgtReplaced);
+    return acgtReplaced;
+  } else throw new Error("str isn't valid DNA");
 };
 
 /**
@@ -39,6 +62,10 @@ export const getComplementaryDNA = (str) => {
  */
 export const isItPrime = (n) => {
   if (n === undefined) throw new Error("n is required");
+  for (let i = 2, s = Math.sqrt(n); i <= s; i++) {
+    if (n % i === 0) return false;
+  }
+  return n > 1;
 };
 
 /**
@@ -55,6 +82,15 @@ export const isItPrime = (n) => {
 export const createMatrix = (n, fill) => {
   if (n === undefined) throw new Error("n is required");
   if (fill === undefined) throw new Error("fill is required");
+  const output = [];
+  const filler = [];
+  for (let i = 0; i < n; i++) {
+    filler.push(fill);
+  }
+  for (let i = 0; i < n; i++) {
+    output.push(filler);
+  }
+  return output;
 };
 
 /**
@@ -72,4 +108,14 @@ export const createMatrix = (n, fill) => {
 export const areWeCovered = (staff, day) => {
   if (staff === undefined) throw new Error("staff is required");
   if (day === undefined) throw new Error("day is required");
+  let staffWorking = 0;
+  staff.forEach((staff) => {
+    if (staff.rota.indexOf(day) > -1) {
+      staffWorking++;
+    }
+  });
+  if (staffWorking >= 3) {
+    return true;
+  }
+  return false;
 };

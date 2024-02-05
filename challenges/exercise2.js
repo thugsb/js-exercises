@@ -46,12 +46,6 @@ export function duplicateNumbers(arr1, arr2) {
   if (arr1 === undefined) throw new Error("arr1 is required");
   if (arr2 === undefined) throw new Error("arr2 is required");
   // Your code here!
-  const duplicates = [];
-  arr1.forEach((num) => {
-    if (arr2.includes(num) && !duplicates.includes(num)) {
-      duplicates.push(num);
-    }
-  });
-  duplicates.sort((a, b) => a - b);
-  return duplicates;
+  const duplicates = arr2.filter((num) => arr1.includes(num));
+  return Array.from(new Set(duplicates.sort((a, b) => a - b)));
 }

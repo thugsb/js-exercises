@@ -24,7 +24,7 @@ export function highestNumber(numbers) {
 export function splitThatString(string) {
   if (!string) throw new Error("string is required");
   // Your solution using the spread operator here!
-  return string.split("");
+  return [...string];
 }
 
 // Optional Chaining Bonus activity!

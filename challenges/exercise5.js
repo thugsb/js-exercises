@@ -114,8 +114,5 @@ export const areWeCovered = (staff, day) => {
       staffWorking++;
     }
   });
-  if (staffWorking >= 3) {
-    return true;
-  }
-  return false;
+  return staffWorking >= 3;
 };
